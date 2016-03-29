@@ -1,3 +1,18 @@
+@media (max-width: 360px) {
+    h1 {
+        text-align: left;
+    }
+    
+    #quick-info ul {
+    text-align: left;
+    }
+
+    #quick-info ul li {
+        display: block;
+        padding: 0;
+    }
+}
+
 h1 {
     text-align: center;
 }
