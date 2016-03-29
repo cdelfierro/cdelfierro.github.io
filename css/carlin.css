@@ -2,6 +2,22 @@ h1 {
     text-align: center;
 }
 
+/* clases */
+.left-menu {
+    border-right: 1px dotted gainsboro;
+    height: 100vh;
+}
+
+.fa-heart {
+    color: crimson;
+}
+
+.fa-star,
+.fa-star-half {
+    color: goldenrod;
+}
+
+/* secciones */
 #quick-info ul {
     list-style-type: none;
     text-align: center;
@@ -13,11 +29,18 @@ h1 {
     padding: 10px;
 }
 
-.left-menu {
-    border-right: 1px dotted gainsboro;
-    height: 100vh;
+.cv-list {
+    -webkit-columns: 2 350px;
+       -moz-columns: 2 350px;
+            columns: 2 350px;
 }
 
-.fa-heart {
-    color: crimson;
+.star-list dt {
+    float: left;
+    clear: left;
+    margin-right: 0.5em;
+}
+
+.star-list dt:after {
+    content: ":";
 }
