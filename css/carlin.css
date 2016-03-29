@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+}
+
+#quick-info ul {
+    list-style-type: none;
+    text-align: center;
+    padding-left: 0;
+}
+
+#quick-info ul li {
+    display: inline;
+    padding: 10px;
+}
+
+.left-menu {
+    border-right: 1px dotted gainsboro;
+    height: 100vh;
+}
+
+.fa-heart {
+    color: crimson;
+}
