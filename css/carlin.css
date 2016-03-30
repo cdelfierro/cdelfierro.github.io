@@ -13,14 +13,14 @@
     }
 }
 
-h1 {
-    text-align: center;
+@media (min-width: 992px) {
+    .cv-content {
+        border-left: 1px dotted gainsboro;
+    }
 }
 
-/* clases */
-.left-menu {
-    border-right: 1px dotted gainsboro;
-    height: 100vh;
+h1 {
+    text-align: center;
 }
 
 .fa-heart {
