@@ -2,7 +2,7 @@
     h1 {
         text-align: left;
     }
-    
+
     #quick-info ul {
     text-align: left;
     }
@@ -23,6 +23,9 @@ h1 {
     text-align: center;
 }
 
+p {
+    text-align: justify;
+}
 .fa-heart {
     color: crimson;
 }
@@ -58,4 +61,15 @@ h1 {
 
 .star-list dt:after {
     content: ":";
+}
+
+.date-list {
+    text-align: justify;
+}
+.date-list dt {
+    font-weight: normal;
+}
+
+.date-list dd {
+    padding: 0.5em;
 }
