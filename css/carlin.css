@@ -63,14 +63,7 @@ p {
     content: ":";
 }
 
-.date-list {
-    text-align: justify;
-}
-.date-list dt {
-    font-weight: normal;
-}
-
-.date-list dt > b:after {
+.panel-title b:after {
     content: ":";
 }
 
