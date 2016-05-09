@@ -51,15 +51,44 @@
   <div class="container">
     <div class="row">
       <div class="hidden-xs hidden-sm col-md-3 left-menu">
-        <ul>
-          <li><a href="#habilidades-y-herramientas">Habilidades y herramientas</a></li>
-            <ul>
-              <li><a href="#lenguajes-de-programacion">Lenguajes de programación</a></li>
-              <li><a href="#desarrollo-web">Desarrollo web</a></li>
-              <li><a href="#otros">Otros</a></li>
-            </ul>
-          <li><a href="#perfiles-sociales">Perfiles sociales</a></li>
-        </ul>
+        <div class="just-padding">
+          <div class="list-group list-group-root well">
+            <a href="#experiencia-laboral" class="list-group-item">
+              Experiencia laboral
+            </a>
+            <a href="#menu-formacion" class="list-group-item" data-toggle="collapse">
+              Formación <i class="glyphicon glyphicon-change glyphicon-menu-right"></i>
+            </a>
+            <div class="list-group collapse" id="menu-formacion">
+              <a href="#formacion-academica" class="list-group-item">
+                Formación académica
+              </a>
+              <a href="#formacion-complementaria" class="list-group-item">
+                Formación complementaria
+              </a>
+            </div>
+            <a href="#menu-habilidades" class="list-group-item" data-toggle="collapse">
+              Habilidades y herramientas <i class="glyphicon glyphicon-change glyphicon-menu-right"></i>
+            </a>
+            <div class="list-group collapse" id="menu-habilidades">
+              <a href="#lenguajes-de-programacion" class="list-group-item">
+                Lenguajes de programación
+              </a>
+              <a href="#frameworks" class="list-group-item">
+                Frameworks y librerías
+              </a>
+              <a href="#sistemas-operativos" class="list-group-item">
+                Sistemas operativos
+              </a>
+              <a href="#otros" class="list-group-item">
+                Otros
+              </a>
+            </div>
+            <a href="#perfiles-sociales" class="list-group-item">
+              Perfiles sociales
+            </a>
+          </div>
+        </div>
       </div>
       <div class="col-xs-12 col-md-9 cv-content">
         <h1>Carlos Gómez del Fierro</h1>
@@ -149,11 +178,11 @@
           </div>
         </section>
         <section>
-          <h2 id=formacion>Formación</h2>
+          <h2 id="formacion">Formación</h2>
           <hr>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><b>Formación académica</b></h3>
+              <h3 id="formacion-academica" class="panel-title"><b>Formación académica</b></h3>
             </div>
             <ul class="list-group">
               <li class="list-group-item">
@@ -168,7 +197,7 @@
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><b>Formación complementaria</b></h3>
+              <h3 id="formacion-complementaria" class="panel-title"><b>Formación complementaria</b></h3>
             </div>
             <div class="panel-body">
               Aprendizaje mediante MOOCs (Massive Online Open Courses), principalmente
@@ -433,5 +462,6 @@
           integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
           crossorigin="anonymous">
   </script>
+  <script src="js/carlin.js"></script>
 </body>
 </html>
