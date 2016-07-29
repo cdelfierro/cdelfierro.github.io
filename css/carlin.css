@@ -23,6 +23,10 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    margin: 0.5em 0;
+}
+
 p {
     text-align: justify;
 }
@@ -31,7 +35,8 @@ p {
 }
 
 .fa-star,
-.fa-star-half {
+.fa-star-o,
+.fa-star-half-o {
     color: goldenrod;
 }
 
@@ -47,7 +52,7 @@ p {
     padding: 10px;
 }
 
-.cv-list {
+.star-list {
     -webkit-columns: 2 350px;
        -moz-columns: 2 350px;
             columns: 2 350px;
@@ -59,8 +64,8 @@ p {
     margin-right: 0.5em;
 }
 
-.star-list dt:after {
-    content: ":";
+.star-list dd {
+  text-align: right;
 }
 
 .panel-title b:after {
