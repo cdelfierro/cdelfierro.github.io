@@ -1,11 +1,19 @@
 <header class="post-header">
 
-	<{% if site.seo %}h2{% else %}h1{% endif %} class="post-title" itemprop="name headline">{{ page.title }}</{% if site.seo %}h2{% else %}h1{% endif %}>
+  {% case page.type %}
+    {% when 'categories' %}
+      {% assign page_title = __.menu.categories %}
+    {% when 'tags' %}
+      {% assign page_title = __.menu.tags %}
+    {% else %}
+      {% assign page_title = {{ page.title }} %}
+  {% endcase %}
+  <{% if site.seo %}h2{% else %}h1{% endif %} class="post-title" itemprop="name headline">{{ page_title }}</{% if site.seo %}h2{% else %}h1{% endif %}>
 
 {% if page.description %}
-	<div class="post-meta">
-		<div class="post-description">{{ page.description }}</div>
-	</div>
+  <div class="post-meta">
+  <div class="post-description">{{ page.description }}</div>
+  </div>
 {% endif %}
 
 </header>
