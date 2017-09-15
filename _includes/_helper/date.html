@@ -1,0 +1,58 @@
+{% assign m = post.date | date: '%-m' %}
+{% if site.date_format contains '%B' %}
+  {% case m %}
+    {% when '1' %}
+      {% assign my_date = site.date_format | replace: '%B', 'enero' %}
+    {% when '2' %}
+      {% assign my_date = site.date_format | replace: '%B', 'febrero' %}
+    {% when '3' %}
+      {% assign my_date = site.date_format | replace: '%B', 'marzo' %}
+    {% when '4' %}
+      {% assign my_date = site.date_format | replace: '%B', 'abril' %}
+    {% when '5' %}
+      {% assign my_date = site.date_format | replace: '%B', 'mayo' %}
+    {% when '6' %}
+      {% assign my_date = site.date_format | replace: '%B', 'junio' %}
+    {% when '7' %}
+      {% assign my_date = site.date_format | replace: '%B', 'julio' %}
+    {% when '8' %}
+      {% assign my_date = site.date_format | replace: '%B', 'agosto' %}
+    {% when '9' %}
+      {% assign my_date = site.date_format | replace: '%B', 'septiembre' %}
+    {% when '10' %}
+      {% assign my_date = site.date_format | replace: '%B', 'octubre' %}
+    {% when '11' %}
+      {% assign my_date = site.date_format | replace: '%B', 'noviembre' %}
+    {% when '12' %}
+      {% assign my_date = site.date_format | replace: '%B', 'diciembre' %}
+  {% endcase %}
+{% elsif site.date_format contains '%b' %}
+  {% case m %}
+    {% when '1' %}
+      {% assign my_date = site.date_format | replace: '%b', 'ene' %}
+    {% when '2' %}
+      {% assign my_date = site.date_format | replace: '%b', 'feb' %}
+    {% when '3' %}
+      {% assign my_date = site.date_format | replace: '%b', 'mar' %}
+    {% when '4' %}
+      {% assign my_date = site.date_format | replace: '%b', 'abr' %}
+    {% when '5' %}
+      {% assign my_date = site.date_format | replace: '%b', 'may' %}
+    {% when '6' %}
+      {% assign my_date = site.date_format | replace: '%b', 'jun' %}
+    {% when '7' %}
+      {% assign my_date = site.date_format | replace: '%b', 'jul' %}
+    {% when '8' %}
+      {% assign my_date = site.date_format | replace: '%b', 'ago' %}
+    {% when '9' %}
+      {% assign my_date = site.date_format | replace: '%b', 'sep' %}
+    {% when '10' %}
+      {% assign my_date = site.date_format | replace: '%b', 'oct' %}
+    {% when '11' %}
+      {% assign my_date = site.date_format | replace: '%b', 'nov' %}
+    {% when '12' %}
+      {% assign my_date = site.date_format | replace: '%b', 'dic' %}
+  {% endcase %}
+{% else %}
+  {% assign my_date = site.date_format %}
+{% endif %}
