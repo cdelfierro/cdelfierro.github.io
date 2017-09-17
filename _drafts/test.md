@@ -4,6 +4,8 @@ date: 2017-09-02 00:02:40 -0300
 categories:
 - testing
 - test
+tags:
+- tag
 ---
 Esta es la página de prueba
 
@@ -13,6 +15,10 @@ Lo que está después de este texto no dale en la portada
 * Entorno: {{ jekyll.environment }}
 * Hora: {{ site.time }}
 * Id: {{ page.id }}
+* Tipo de página: {{ page.type }}
+* Categorías: {{ site.categories }}
+* Tags: {{ site.tags }}
+* Tags size: {{ site.tags.size }}
 
 {% highlight python linenos %}
 def fib1(n):
