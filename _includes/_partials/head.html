@@ -17,18 +17,12 @@
 {% endif %}
 
 
-{% comment %} #238, Disable Baidu tranformation {% endcomment %}
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 {% if site.google_site_verification %}
   <meta name="google-site-verification" content="{{ site.google_site_verification }}" />
-{% endif %}
-
-
-{% if site.qihu_site_verification %}
-  <meta name="360-site-verification" content="{{ site.qihu_site_verification }}" />
 {% endif %}
 
 
