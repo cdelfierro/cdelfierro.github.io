@@ -1,6 +1,10 @@
 ---
 title: Calculando números de la sucesión de Fibonacci
-date: 2017-09-19 00:50:06 -0300
+description: "Los números de Fibonacci se definen mediante una ecuación de recurrencia.
+Para calcular un número n en la sucesión se muestran dos algoritmos: uno recursivo
+y uno lineal y se comparan de acuerdo a su tiempo de ejecución mediante el análisis
+de crecimiento asintótico."
+date: 04-02-2018 23:28:03 -0300
 mathjax: true
 categories:
 - algoritmos
@@ -8,41 +12,44 @@ tags:
 - fibonacci
 - algoritmos
 - sucesiones
+- recursión
+- análisis asintótico
 ---
 
-Los números de Fibonacci son la secuencia de números enteros:
+# Números de Fibonacci
 
-$$ 0, 1, 1, 2, 3, 5, 8, 13, 21,\ldots $$
+Los **_números de Fibonacci_** se definen mediante la siguiente secuencia
 
-<!-- more -->
-El siguiente número se calcula mediante la suma de los dos anteriores, en el
-ejemplo, el próximo número es \\( 13 + 21 = 34 \\). Luego, la sucesión de Fibonacci
-se puede definir por la siguiente ecuación de recurrencia:
+$$
+\begin{align}
+    F_0 &= 0 \\
+    F_1 &= 1 \\
+    F_n &= F_{n - 1} + F_{n - 2} \quad \text{para } n \geq 2
+\end{align}
+$$
 
-$$  F_n = F_{n-1} + F_{n-2} $$
+Así, cada número de Fibonacci es la suma de los dos anteriores, produciendo la
+secuencia
 
-Esta relación necesita que definamos dos números semilla, pues cada término
-depende de los dos anteriores, por lo que los dos primeros números se definen
-como:
+$$ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55\ldots $$
 
-$$  F_0 = 0 \\
-    F_1 = 1 $$
+# Algoritmo recursivo
 
 Dado un número positivo \\( n \\), queremos calcular \\(F_n \\). Una primera
-aproximación es utilizar un algoritmo recursivo:
+aproximación es utilizar el siguiente algoritmo:
 
-{% highlight python %}
+{: #algoritmo-recursivo}
+{% highlight python linenos%}
 def fib(n):
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1
+    if n <= 1:
+        return n
     return fib(n - 1) + fib(n - 2)
 {% endhighlight %}
 
-El problema de este algoritmo es su lentitud, debido a que repite llamadas a la
-misma función varias veces. Por ejemplo si queremos calcular \\(F_5 \\) la secuencia
-de llamadas a la función es la siguiente:
+
+Un problema que podemos ver en este algoritmo al ejecutarlo es su _lentitud_, la cual se debe
+a que repite mucho trabajo. Por ejemplo, si queremos calcular \\(F_5\\) el árbol
+de llamadas a la función es el siguiente:
 
 {% highlight text %}
 fib(5)
@@ -70,7 +77,12 @@ fib(5)
         └── 1
 {% endhighlight %}
 
-Cada llamada a la función se puede ver en la siguiente tabla:
+La llamada a `fib(5)` llama a `fib(4)` y `fib(3)`, pero la llamada a `fib(4)`
+también llama a `fib(3)`. El valor retornado es el mismo para ambas llamadas
+\\((F_3 = 2)\\), por lo que está repitiendo trabajo cada vez que vuelve a
+llamar a la función con el mismo argumento y el algoritmo no tiene idea de que
+esto está ocurriendo. Para el caso `fib(5)` podemos ver la cantidad de llamadas
+de cada función en la siguiente tabla
 
 | función | n° llamadas |
 |:---------:|:-------------------:|
@@ -81,25 +93,76 @@ Cada llamada a la función se puede ver en la siguiente tabla:
 | `fib(1)` | 5 |
 | `fib(0)` | 3 |
 
-Esto ocurre porque por cada llamada a `fib(n)` para `n != 1` o `n != 0`, se deben
-realizar dos más a la función evaluada en los números anteriores (`n - 1` y `n - 2`),
-generando un árbol en donde las distintas ramas llaman a funciones que ya habíamos
-evaluado antes. Podemos ver el caso de `fib(4)` que genera una rama para `fib(3)`
-y para `fib(2)`. La rama que se evalúa primero es `fib(3)`, que a su vez hace
-una llamada a `fib(2)` y `fib(1)`. Aquí debemos evaluar `fib(2)` primero, pero
-tenemos otra rama que también necesista evaluar `fib(2)`, pero el algoritmo es
-completamente ciego frente a eso. Una vez que termina de evaluar `fib(3)`, el
-algoritmo ya ha evaluado también `fib(2)` y `fib(1)`, pero lo ha olvidado, y
-entra en la rama que necesita evaluar `fib(2)`. Esto hace que el algoritmo sea
-lento, y para `n` muy grande la cantidad de evaluaciones crece demasiado. Su
-complejidad es de \\( \mathcal{O}(\phi^n)\\), donde \\( \phi = \frac{(1 + \sqrt{5})}
-{2} \\) es la proporción áurea.[^1]
+## Eficiencia asintótica del algoritmo recursivo
 
-[^1]: En una actualización a este artículo voy a probar la complejidad del algoritmo.
+A medida que \\(n\\) va creciendo, el algoritmo recursivo es cada vez menos
+eficiente, ya que las llamadas a una misma función van aumentando. Veremos el orden de
+crecimiento del tiempo de ejecución analizando la _eficiencia asintótica_ del
+algoritmo. El tiempo de ejecución está dado por la ecuación de recurrencia
+
+$$ T(n) = T(n-1) + T(n-2) + \Theta(1) \tag{i} \label{i}$$
+
+Esta ecuación nos muestra que tiempo de ejecución del algoritmo es
+la suma de los tiempos de ejecución del algoritmo, evaluados en \\(n - 1\\) y \\(n - 2\\)
+más un tiempo constante que representa la suma de los valores retornados por las
+llamadas recursivas (línea 4 del [algoritmo](#algoritmo-recursivo)).
+
+### Resolución de la ecuación de recurrencia
+
+Utilizaremos el método de sustitución para resolver la ecuación \\(\eqref{i}\\).
+Suponemos como hipótesis inductiva que el tiempo de ejecución es
+
+$$ T(n) \leq aF_n - b, \quad \text{donde } a > 1 \land b < 0 \label{ii} \tag{ii}$$
+
+y sustituimos en la ecuación \\(\eqref{i}\\) quedando
+
+$$
+\begin{align}
+    T(n) &\leq (aF_{n-1} - b) + (aF_{n-2} - b) + \Theta(1) \label{ii.1} \tag{ii.1}\\
+    &= a(F_{n-1} + F_{n-2}) -2b + \Theta(1)\\
+    &= aF_n - b - (b - \Theta(1)) \label{ii.2} \tag{ii.2}\\
+    &\leq aF_n - b \label{ii.3} \tag{ii.3}
+\end{align}
+$$
+
+Elegimos un \\(b\\) lo suficientemente grande para dominar a \\(\Theta(1)\\) en
+\\(\eqref{ii.2}\\) y satisfacer la desigualdad \\(\eqref{ii.3}\\), y un \\(a\\) también suficientemente
+grande para satisfacer \\(\eqref{ii.1}\\).
+
+### Relación con el número aúreo
+
+La sucesión de Fibonacci puede ser representada como una _expresión de forma cerrada_
+conocida como la **fórmula de Binet**
+
+$$ F_n = \dfrac{\phi^n - \psi^n} {\sqrt{5}} $$
+
+Donde \\(\phi\\) es el [número aúreo](https://es.wikipedia.org/wiki/Número_áureo)
+y \\(\psi\\) su conjugado, definidos por \\(\phi = \frac{1 + \sqrt{5}}{2}\\) y
+\\(\psi = \frac{1 - \sqrt{5}}{2}\\). Se puede ver fácilmente que \\(\lvert\psi\rvert < 1\\),
+entonces tenemos que
+
+$$ \dfrac{\lvert\psi^n\rvert}{\sqrt{5}} < \dfrac{1}{\sqrt{5}} < \dfrac{1}{2} $$
+
+Esto significa que el aporte de \\(\psi\\) es menor a \\(\frac{1}{2}\\) en valor absoluto
+y por lo tanto \\(F_i\\) es el entero más cercano a \\(\frac{\phi^n}{\sqrt{5}}\\),
+lo que podemos escribir como
+
+$$ F_n = \left\lfloor \dfrac{\phi^n}{\sqrt{5}} + \dfrac{1}{2} \right\rfloor \label{iii} \tag{iii}$$
+
+Finalmente si reemplazamos \\(\eqref{iii}\\) en \\(\eqref{ii}\\) podemos concluir
+que
+
+$$ T(n) = \Theta(\phi^n) \label{iv} \tag{iv} $$
+
+Lo que nos da un crecimiento exponencial parta el algoritmo recursivo, mostrando
+por qué a medida que aumentamos el \\(n\\), el algoritmo es cada vez más lento.
+Es necesario entonces que encontremos otra aproximación al problema.
+
+# Algoritmo lineal
 
 Una aproximación más eficiente a este problema es la siguiente:
 
-{% highlight python %}
+{% highlight python linenos%}
 def fib(n):
     a, b = 0, 1
     for __ in range(n - 1):
@@ -107,22 +170,26 @@ def fib(n):
     return b
 {% endhighlight %}
 
-Este algoritmo va generando la secuencia a medida que la va recorriendo, lo que
-resulta en que calcula cada número sólo una vez y tiene una complejidad de
-\\( \mathcal{O}(n) \\), la cual es muchísimo menor que la del algoritmo recursivo.
+Este algoritmo parte de los dos valores iniciales y va generando la secuencia a
+medida que la va recorriendo, llevando el conteo sólo de los dos ultimos números.
+Como recorre la secuencia solo una vez, también calcula cada número una vez por
+lo que tiene un tiempo de ejecución del orden de \\( \Theta(n) \\), el cual es
+muchísimo menor que el del algoritmo recursivo, descrito en la sección previa.
 
-Finalmente muestro una tabla del tiempo en segundos que se demora en calcular
-algunos números de Fibonacci para ambos algoritmos:
+# Comparación empírica del tiempo de ejecución de ambos algoritmos
 
-| n | Recursivo | Rápido |
+Finalmente se muestra una tabla no exhaustiva que muestra el tiempo en segundos
+que se demora en calcular algunos números de Fibonacci para ambos algoritmos:
+
+| n | Recursivo | Lineal |
 |:-:|:---------:|:-------------------:|
-|5| \\( 1.22 \times 10^-5\\) | \\( 9.78 \times 10^-6\\) |
-|10| \\( 4.50 \times 10^-5\\) | \\( 1.03 \times 10^-5\\) |
-|15| \\( 4.03 \times 10^-4\\) | \\( 1.12 \times 10^-5\\) |
-|20| \\( 4.56 \times 10^-3\\) | \\( 1.32 \times 10^-5\\) |
-|25| \\( 5.64 \times 10^-2\\) | \\( 1.17 \times 10^-5\\) |
-|30| \\( 5.98 \times 10^-1\\) | \\( 1.37 \times 10^-5\\) |
-|35| \\( 6.48 \\) | \\( 1.32 \times 10^-5\\) |
-|40| \\( 7.66 \times 10^1\\) | \\( 1.37 \times 10^-5\\) |
-|45| \\( 9.23 \times 10^2\\) | \\( 1.42 \times 10^-5\\) |
-|50| \\( 1.11 \times 10^4\\) | \\( 1.47 \times 10^-5\\) |
+|5| \\( 1.22 \times 10^{-5}\\) | \\( 9.78 \times 10^{-6}\\) |
+|10| \\( 4.50 \times 10^{-5}\\) | \\( 1.03 \times 10^{-5}\\) |
+|15| \\( 4.03 \times 10^{-4}\\) | \\( 1.12 \times 10^{-5}\\) |
+|20| \\( 4.56 \times 10^{-3}\\) | \\( 1.32 \times 10^{-5}\\) |
+|25| \\( 5.64 \times 10^{-2}\\) | \\( 1.17 \times 10^{-5}\\) |
+|30| \\( 5.98 \times 10^{-1}\\) | \\( 1.37 \times 10^{-5}\\) |
+|35| \\( 6.48 \times 10^0\\) | \\( 1.32 \times 10^{-5}\\) |
+|40| \\( 7.66 \times 10^1\\) | \\( 1.37 \times 10^{-5}\\) |
+|45| \\( 9.23 \times 10^2\\) | \\( 1.42 \times 10^{-5}\\) |
+|50| \\( 1.07 \times 10^4\\) | \\( 1.47 \times 10^{-5}\\) |
