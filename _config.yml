@@ -18,7 +18,7 @@ date_format: '%e de %B de %Y'
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com' and baseurl as '/child'
 url:
 baseurl:
-permalink: /post/:slug/
+permalink: /post/:title/
 
 # Pagination
 paginate: 10
