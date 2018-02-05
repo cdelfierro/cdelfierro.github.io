@@ -1,8 +1,8 @@
 ---
 title: Calculando números de la sucesión de Fibonacci
 description: "Los números de Fibonacci se definen mediante una ecuación de recurrencia.
-Para calcular un número n en la sucesión se muestran dos algoritmos: uno recursivo
-y uno lineal y se comparan de acuerdo a su tiempo de ejecución mediante el análisis
+Para calcular un número \\(n\\) en la sucesión se muestran dos algoritmos: uno recursivo
+y uno lineal y se comparan de acuerdo a su tiempo de ejecución mediante análisis
 de crecimiento asintótico."
 date: 04-02-2018 23:28:03 -0300
 mathjax: true
