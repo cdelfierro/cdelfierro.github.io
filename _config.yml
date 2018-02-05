@@ -18,7 +18,7 @@ date_format: '%e de %B de %Y'
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com' and baseurl as '/child'
 url:
 baseurl:
-permalink: /:year/:month/:day/:slug/
+permalink: /post/:slug/
 
 # Pagination
 paginate: 10
@@ -312,7 +312,7 @@ auto_excerpt:
 post_meta:
   item_text: true
   created_at: true
-  updated_at: false
+  updated_at: true
   categories: true
 
 # Post wordcount display settings
